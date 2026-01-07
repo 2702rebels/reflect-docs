@@ -1,0 +1,9 @@
+# package manager files
+pnpm-lock.yaml
+yarn.lock
+pnpm-lock.json
+
+# dependencies
+node_modules
+
+src/content/docs/**

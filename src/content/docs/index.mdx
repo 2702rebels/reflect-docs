@@ -1,0 +1,55 @@
+---
+title: Reflect Documentation
+description: Modern dashboard for FRC
+template: splash # Remove or comment out this line to display the site sidebar on this page.
+hero:
+  title: |
+    <span
+      class="font-bold text-transparent
+        bg-clip-text bg-gradient-to-b
+        from-accent-700 to-accent-400
+        dark:from-accent-500 dark:to-accent-200"
+    >
+      Reflect
+    </span>
+  tagline: Modern dashboard for FRC
+  image:
+    file: ../../assets/reflect-hero.webp
+  actions:
+    - text: Getting started
+      link: /getting-started/installation
+      icon: right-arrow
+    - text: Web version
+      link: https://reflect.2702rebels.com/
+      icon: external
+      variant: minimal
+    - text: Download the installer
+      link: https://github.com/2702rebels/reflect/releases/latest
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from "@astrojs/starlight/components";
+
+<CardGrid stagger>
+  <Card
+    title="Modern sleek UI"
+    icon="starlight">
+    Visually appealing user interface built with modern web technologies
+  </Card>
+  <Card
+    title="Custom widgets"
+    icon="puzzle">
+    Customizable with widgets crafted specifically for each season gameplay
+  </Card>
+  <Card
+    title="OSS and FRC team supported"
+    icon="heart">
+    Built and supported by [Rebels (FRC 2702)](https://2702rebels.com/) from Kitchener-Waterloo, Ontario
+  </Card>
+  <Card
+    title="Lightweight and performant"
+    icon="rocket">
+    Designed to use minimum system resources and deliver real-time performance
+  </Card>
+</CardGrid>

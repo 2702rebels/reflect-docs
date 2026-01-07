@@ -1,0 +1,37 @@
+---
+title: Architecture Overview
+description: Reflect architecture overview.
+sidebar:
+  order: 1
+---
+
+Reflect is built with modern web technologies on [React](https://react.dev/)/[Vite](https://vite.dev/) stack and is written in Typescript.
+To facilitate distribution as a desktop application it uses [Tauri](https://tauri.app/) for packaging.
+
+Tauri provides a secure foundation for building compact cross-platform desktop applications.
+It leverages system's native webview resulting in a smaller bundle size.
+
+:::note
+In the future we intend to distribute Reflect as both desktop and web application.
+With new SystemCore control system it should be possible to self-host directly on the robot.
+:::
+
+Reflect is architected on a modular principle. It leverages separately developed packages for handling [Network Tables communication protocol](https://github.com/2702rebels/realm/tree/main/packages/ntcore)
+and [WPI data-related transformations](https://github.com/2702rebels/realm/tree/main/packages/wpidata).
+These packages may be of interest to anyone developing Javascript/Typescript-based applications to interface with the robot over Network Tables.
+
+The application separates data management and presentation layers.
+[Widgets](../reference/widgets) are used to visualize data that has been abstracted into a common transport-independent representation.
+
+Developing additional widgets only requires understanding of the data abstractions and basic React components development experience.
+
+## Data Transformations
+
+Reflect communicates with the robot code over Network Tables protocol. NT is a pub/sub protocol that supports data topics of both primitive and composite types.
+
+Historically WPILIB relied on the concept of [Sendable](https://frcdocs.wpi.edu/en/latest/docs/software/telemetry/robot-telemetry-with-sendable.html#what-is-sendable) data structures to represent a complex type as a set of loosely related topics.
+This approach makes it difficult to holistically manage and represent such data sources. Reflect automatically detects such topics and combines them into composite channels that are presented as JSON objects to consumers.
+
+Similarly Reflect processes [Protobuf](https://protobuf.dev) and [Packed Struct](https://github.com/wpilibsuite/allwpilib/blob/main/wpiutil/doc/struct.adoc) serialized binary data and transforms them into JSON objects.
+
+These transformations, as well as data retention and other capabilities, are handled by [wpidata](https://github.com/2702rebels/realm/tree/main/packages/wpidata) package and can be used independently of the Reflect application itself.
