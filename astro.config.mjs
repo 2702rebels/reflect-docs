@@ -5,7 +5,7 @@ import { defineConfig, envField } from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
-  trailingSlash: "never",
+  trailingSlash: "always",
   integrations: [
     starlight({
       title: "Reflect Documentation",
