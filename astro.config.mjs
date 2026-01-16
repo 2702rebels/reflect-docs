@@ -13,7 +13,7 @@ export default defineConfig({
         alt: "Reflect",
         src: "./public/reflect.svg",
       },
-      social: [{ icon: "github", label: "GitHub", href: "https://github.com/2702rebels/realm/tree/main/apps/reflect" }],
+      social: [{ icon: "github", label: "GitHub", href: "https://github.com/2702rebels/reflect" }],
       sidebar: [
         {
           label: "Overview",
