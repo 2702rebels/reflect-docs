@@ -5,6 +5,42 @@ sidebar:
   order: 2
 ---
 
+## Text or Numeric Value
+
+![Value Widget](../../../assets/widget-value.webp)
+
+A value widget displays a text or numeric value.
+
+Accepted channel types:
+- primitive `string`, `number`
+
+Configuration options:
+- _Title_
+- _Content alignment_
+- _Content (font) size_
+- _Monospace font_
+- _Numeric value maximum fraction digits_
+
+## Color Value
+
+![Color Widget](../../../assets/widget-color.webp)
+
+A color widget displays a color based on a string, number or boolean value.
+
+If the bound value is a string then it must contain a [valid CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/color).
+
+If the bound value is a number, it is converted to an RGB color, assuming the lowest 8 bits representing Blue, the next 8 bits representing Green, and the next 8 bits representing Red.
+
+If the bound value is a boolean, then the corresponding color configured in the options is used.
+
+Accepted channel types:
+- primitive `string`, `number`, `boolean`
+
+Configuration options:
+- _Title_
+- _True-value color_
+- _False-value color_
+
 ## Toggle
 
 ![Toggle Widget](../../../assets/widget-toggle.webp)
@@ -38,6 +74,30 @@ Accepted channel types:
 Configuration options:
 - _Title_
 - _Interactive_
+
+## Slider
+
+![Slider Widget](../../../assets/widget-slider.webp)
+
+A numeric slider widget with a configurable range and step.
+
+:::note[Interactive]{icon="forward-slash"}
+Allows user changing the value and propagating change back to the channel, when _Interactive_ option is enabled.
+:::
+
+:::danger
+NetworkTables differentiates between double and integer topics. Attempt to publish a non-integer value to an integer-based topic will fail.
+:::
+
+Accepted channel types:
+- primitive `number`
+
+Configuration options:
+- _Title_
+- _Minimum value_
+- _Maximum value_
+- _Step_
+- _Numeric value maximum fraction digits_
 
 ## Gyro
 
@@ -92,6 +152,14 @@ Configuration options:
 - _Style_ — field variant
 - _Orientation_ — landscape 0&deg; or 180&deg;, portrait 90&deg; or 270&deg;
 - _Bumper size (inches)_ — robot dimensions
+
+## FMS
+
+![FMS Widget](../../../assets/widget-fms.webp)
+
+A widget that displays FMS information, including robot state and match information.
+
+This widget comes preconfigured bound to `/FMSInfo`. You should not typically change the default slot binding.
 
 ## Power — CTRE PDP
 
