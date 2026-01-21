@@ -1,0 +1,97 @@
+---
+title: ReflectLib
+description: Enhancements for Reflect in the robot code.
+sidebar:
+  order: 6
+---
+
+Reflect and some of its widgets require specific data representation to visualize complex information.
+
+Reflect widgets are limited to a single slot for channel binding purposes. This is an architectural
+compromise between convenience and implementation complexity. To facilitate visualization of complex
+data such as swerve telemetry or match period/time we require channel data to be serialized in a specific way.
+
+We provide implementations that you can copy-paste into your robot project code and instructions on how
+to setup publishing to take advantage of these features.
+
+## Installation
+
+Copy-paste corresponding files into your robot project code. For Java projects, we recommend placing these
+under `lib` folder inside your robot code folder (i.e. `/src/main/java/frc/robot/lib`).
+
+If you choose to place these files elsewhere you would have to modify the package line accordingly:
+```java
+package frc.robot.lib;
+```
+
+:::note
+Java-only implementation at this time.
+:::
+
+### Match Time
+
+Copy-paste the following file into your robot project code:
+[https://github.com/2702rebels/reflect/blob/main/reflectlib/MatchTime.java](https://github.com/2702rebels/reflect/blob/main/reflectlib/MatchTime.java)
+
+#### Robot Telemetry with Annotations (Epilogue)
+
+If you are using [Robot Telemetry with Annotations](https://docs.wpilib.org/en/stable/docs/software/telemetry/robot-telemetry-with-annotations.html) add
+the following to your `Robot` class:
+```java
+@Logged(name = "MatchTime")
+private final MatchTime matchTime = new MatchTime(2026);
+```
+
+Update the instance in your robot periodic method:
+```java
+@Override
+public void robotPeriodic() {
+  matchTime.update(MatchTime.kGameData2026.get());
+}
+```
+
+The data will be published to `/Robot/MatchTime`, unless you have a custom configuration for Epilogue.
+
+#### Manual publishing
+
+If you prefer to publish manually setup the publisher and update it your robot periodic method.
+
+In your `Robot` class:
+```java
+private final MatchTime matchTime = new MatchTime(2026);
+private final StructPublisher<MatchTime> matchTimeTopic =
+  NetworkTableInstance.getDefault()
+    .getTable("Robot")
+    .getStructTopic("MatchTime", MatchTime.struct)
+    .publish();
+```
+
+In your robot period method:
+```java
+@Override
+public void robotPeriodic() {
+  matchTime.update(MatchTime.kGameData2026.get());
+  matchTimeTopic.set(matchTime);
+}
+```
+
+### Swerve Telemetry
+
+Copy-paste the following file into your robot project code:
+[https://github.com/2702rebels/reflect/blob/main/reflectlib/SwerveTelemetry.java](https://github.com/2702rebels/reflect/blob/main/reflectlib/SwerveTelemetry.java)
+
+Construct telemetry instance based on your swerve implementation and publish using Epilogue or manual publishing. See [Match Time](#match-time) instructions above for general guidance.
+
+For example, for [CTRE swerve](https://v6.docs.ctr-electronics.com/en/latest/docs/api-reference/mechanisms/swerve/swerve-overview.html):
+
+```java
+private final SwerveTelemetry telemetry = new SwerveTelemetry();
+
+public void update(SwerveDriveState state) {
+  telemetry.rotation = state.Pose.getRotation();
+  telemetry.currentSpeeds = state.Speeds;
+  telemetry.currentStates = state.ModuleStates;
+  telemetry.desiredStates = state.ModuleTargets;
+}
+```
+

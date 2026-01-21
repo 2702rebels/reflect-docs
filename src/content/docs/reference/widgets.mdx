@@ -118,6 +118,31 @@ Configuration options (Yaw mode):
 - _Symmetric dial (-90°…90°)_ — when enabled shows dial with both positive and negative values
 - _Clockwise orientation_ — when enabled shows dial in CW orientation, default is CCW
 
+## Swerve
+
+![Swerve Widget](../../../assets/widget-swerve.webp)
+
+A swerve widget displays rotation, module and chassis speeds.
+
+This widget is designed to work with a custom [SwerveTelemetry structure](https://github.com/2702rebels/reflect/blob/main/reflectlib/SwerveTelemetry.java) that encapsulates information about the swerve subsystem.
+See [ReflectLib](/getting-started/reflectlib/#swerve-telemetry) for setup instructions.
+
+Alternatively you can bound this widget to a channel representing an array of `SwerveModuleState` values, but only these module directions and speeds will be shown.
+
+:::tip
+Depending on your robot configuration you may need to adjust maximum linear and angular speeds to improve visual representation of the corresponding velocity vectors.
+:::
+
+Accepted channel types:
+- structured `SwerveTelemetry`, `SwerveModuleState`
+
+Configuration options:
+- _Title_
+- _Rotate chassis per robot's pose_
+- _Show chassis speeds_
+- _Maximum linear speed (m/s). Default is 5 m/s_
+- _Maximum angular speed (deg/s). Default is 360 deg/s_
+
 ## Line Chart
 
 ![Line Chart Widget](../../../assets/widget-line-chart.webp)
@@ -138,7 +163,7 @@ Configuration options:
 
 ## 2D Field
 
-![Line Chart Widget](../../../assets/widget-field2d.webp)
+![2D Field Widget](../../../assets/widget-field2d.webp)
 
 A 2D field widgets displays the pose of the robot on the field. Supports landscape and portrait orientations.
 
@@ -160,6 +185,47 @@ Configuration options:
 A widget that displays FMS information, including robot state and match information.
 
 This widget comes preconfigured bound to `/FMSInfo`. You should not typically change the default slot binding.
+
+## Match Time
+
+![Match Time Widget](../../../assets/widget-matchtime.webp)
+
+A widget that displays match time, supplemented with the current period and possibly game-specific information.
+
+This widget is designed to work with a custom [MatchTime structure](https://github.com/2702rebels/reflect/blob/main/reflectlib/MatchTime.java) that encapsulates information about the match in progress, including game-specific data.
+See [ReflectLib](/getting-started/reflectlib/#match-time) for setup instructions.
+
+Alternatively you can bound this widget to a numeric channel, which is interpreted as the remaining time in seconds.
+
+Accepted cannel types:
+- primitive `number`
+- structured
+  [`MatchTime`](https://github.com/2702rebels/reflect/blob/main/reflectlib/MatchTime.java)
+
+Configuration options:
+- _Title_
+- _Show game-specific data_
+- _Attention time threshold (pulse animation). Default is 5 seconds_
+- _Caution time threshold. Default is 30 seconds_
+- _Danger time threshold. Default is 10 seconds_
+
+## Alerts
+
+![Alerts Widget](../../../assets/widget-alerts.webp)
+
+A widget that displays [persistent WPILIB Alerts](https://docs.wpilib.org/en/stable/docs/software/telemetry/persistent-alerts.html).
+
+This widget comes preconfigured bound to `/SmartDashboard/Alerts`. You can change the default slot binding to any other alerts channel. For example, [Choreo publishes its alerts](https://choreo.autos/choreolib/getting-started/#choreo-specific-alerts) under `/SmartDashboard/Choreo Alerts`.
+
+Accepted cannel types:
+- composite
+  `Alerts`
+
+Configuration options:
+- _Title_
+- _Show error alerts_
+- _Show warning alerts_
+- _Show informational alerts_
 
 ## Power — CTRE PDP
 
