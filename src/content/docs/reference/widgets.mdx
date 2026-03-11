@@ -118,6 +118,63 @@ Configuration options (Yaw mode):
 - _Symmetric dial (-90°…90°)_ — when enabled shows dial with both positive and negative values
 - _Clockwise orientation_ — when enabled shows dial in CW orientation, default is CCW
 
+## Radial Gauge
+
+![Radial Gauge Widget](../../../assets/widget-gauge-radial.webp)
+
+A radial gauge with configurable range and presentation options.
+
+Accepted channel types:
+- primitive `number`
+
+Configuration options:
+- _Title_
+- _Min_ and _Max_ numeric range
+- _Start_ and _Stop_ radial angle
+- _Minor_ and _Major_ tick step
+- _High-_ and _Low-threshold_ for alerting
+- _Value (font) size_
+- _Numeric value maximum fraction digits_
+
+## Linear Gauge
+
+![Linear Gauge Widget](../../../assets/widget-gauge-linear.webp)
+
+A linear gauge in both horizontal and vertical orientation with support for multiple channels.
+
+By default this widget displays the default slot binding as a single gauge. In multiple channels mode the default slot binding is ignored, instead an explicitly defined set of slot bindings is presented as individual gauges.
+
+Accepted channel types:
+- primitive `number`
+
+Configuration options:
+- _Title_
+- _Vertical_ orientation
+- _Multiple-channels_ mode
+- _Numeric axis_ visibility
+- _Channel label_ visibility (multiple-channels mode only)
+- _Channel value_ visibility (multiple-channels mode only)
+- _Min_ and _Max_ numeric range
+- _High-_ and _Low-threshold_ for alerting
+- _Numeric value maximum fraction digits_
+
+## Checklist
+
+![Checklist Widget](../../../assets/widget-checklist.webp)
+
+A checklist based on a set of individual boolean channels.
+
+:::caution
+Default slot binding is not used for this widget. You must specify channels manually via configuration.
+:::
+
+Accepted channel types:
+- primitive `boolean`
+
+Configuration options:
+- _Title_
+- _Channels_
+
 ## Swerve
 
 ![Swerve Widget](../../../assets/widget-swerve.webp)
